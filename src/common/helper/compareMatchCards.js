@@ -1,10 +1,23 @@
-export function compareMatchCards(cardOne, cardTwo){
+function getCardName(path){
+    if(!path || typeof(path) !== 'string'){
+        return;
+    }else{
+        return path.slice(-5);
+    }
+}
+
+export function compareMatchCards(cardOne, cardTwo, assignCards){
     if(cardOne && cardTwo){
-        if(cardOne.src.slice(-5) === cardTwo.src.slice(-5)){
-            console.log('Those cards do match!');
-            
-        }else{
-            console.log('Those cards do not match');
+        if(getCardName(cardOne.src) === getCardName(cardTwo.src)){
+            assignCards(prevCard => {
+                return prevCard.map(card =>{
+                    if(getCardName(card.src) === getCardName(cardOne.src)){
+                        return {...card, matched: true}
+                    }else{
+                        return card;
+                    }
+                })
+            })
         }
     }
 }
