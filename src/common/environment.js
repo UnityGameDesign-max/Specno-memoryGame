@@ -2,12 +2,12 @@ export const Environments = {
     Local: {
         name: 'Local',
         uiHost: 'http://localhost:3000',
-        assetBase: 'http://localhost:3000/assets/'
+        assetBase: 'http://localhost:3000/assets'
     },
     Prod: {
         name: 'Prod',
         uiHost: 'https://specno-memory.web.app/',
-        assetBase: 'http://localhost:3000/assets/'
+        assetBase: 'http://localhost:3000/assets'
     }
 };
 
