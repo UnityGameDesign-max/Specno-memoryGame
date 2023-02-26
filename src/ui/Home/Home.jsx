@@ -14,9 +14,18 @@ import {
     Icons
 } from 'common/constants';
 
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
+
 import { 
     PrimaryButton
 } from 'common/styles';
+
+import { 
+    addUsername 
+} from 'common/provider/slices/playerSlice';
 
 
 const IntroText = styled.h1`
@@ -32,7 +41,7 @@ const FlexItems = css`
 const placeVerticalItems = css`
     flex-direction: column;
 `;
-const PlayerContent = styled.div`
+const PlayerContent = styled.form`
     ${FlexItems}
     justify-content: center;
     align-items: flex-end;
@@ -67,16 +76,28 @@ const ButtonContainer = styled.div`
 `;
 
 function Home(){
-    const [details, setDetails] = useState({
-        player: '',
-        opponent: ''
-    });
+    const [player, setPlayer] = useState('');
+    const [opponent, setOpponent] = useState('');
+
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+        dispatch(
+            addUsername({
+                player: player,
+                opponent: opponent
+            })
+        )
+    }
+
+    const currentUser = useSelector(state => state.players);
+    console.log(currentUser);
     return(
         <Fragment>
             <IntroText>
              Are you ready to play ?
             </IntroText>
-            <PlayerContent>
+            <PlayerContent >
                 <Player>
                     <img 
                      src={Icons.Player}
@@ -85,8 +106,10 @@ function Home(){
                     <PlayerInput 
                      placeholder='Name of Player 1'
                      size='25'
-                     value={details.player}
-                     type='text'
+                     value={player}
+                     required
+                     onChange={(e) => setPlayer(e.target.value)}
+                     type='text'  
                     />
                 </Player>
                 <Opponent>
@@ -97,13 +120,16 @@ function Home(){
                     <PlayerInput 
                      placeholder='Name of Player 2'
                      size='25'
-                     value={details.opponent}
+                     required
+                     value={opponent}
+                     onChange={(e) => setOpponent(e.target.value)}
                      type='text'
                     />
                 </Opponent>
             </PlayerContent>
             <ButtonContainer>
                 <PrimaryButton
+                 onClick={handleSubmit}
                  type='submit'
                 >
                  Let's Play
