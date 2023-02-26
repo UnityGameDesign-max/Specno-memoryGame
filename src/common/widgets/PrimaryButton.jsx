@@ -3,21 +3,19 @@ import
 from 'prop-types';
 
 import{
-    styled
-} from 'styled-components'
+    PrimaryButton
+}from 'common/styles';
 
 function PrimaryButton(
-    {buttonText, onClick, typeOfButton}
+    {buttonText, onClick}
 ){
-    <button
+    <PrimaryButton
      onClick={onClick}
     >
      {buttonText}
-    </button>
+    </PrimaryButton>
 }
 
-const PrimaryButton = styled.button`
-    
-`;
+
 
 export const PrimaryButtonWidget = PrimaryButton;

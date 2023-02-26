@@ -21,6 +21,8 @@ export const FontSizes = {
     Huge:'6.5vmin'
 };
 
+export const ADD_PLAYER_USERNAME = 'ADD_USERNAMES_PLAYER_USERNAME';
+
 export const Icons = {
     Player: `${Environment.assetBase}/icons/player1.svg`,
     Opponent: `${Environment.assetBase}/icons/player2.svg`,
