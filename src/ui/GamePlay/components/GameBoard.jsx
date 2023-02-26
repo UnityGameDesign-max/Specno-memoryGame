@@ -58,7 +58,9 @@ function GameBoard(){
         compareMatchCards(
             cardChoiceOne,
             cardChoiceTwo,
-            setCards
+            setCards,
+            setCardChoiceOne,
+            setCardChoiceTwo,
         )
     },[cardChoiceOne, cardChoiceTwo])
 
@@ -67,8 +69,7 @@ function GameBoard(){
     return (
         <GameContainer>
             {cards
-                .filter(card => card.matched == false).
-                map(card => (
+                .map(card => (
                 <CardChoiceUI 
                     card={card}
                     key={card.id}

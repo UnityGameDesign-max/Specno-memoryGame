@@ -1,5 +1,6 @@
 import 
-    styled 
+    styled,
+    {css}
 from 'styled-components';
 
 import{
@@ -12,18 +13,39 @@ const CardContainer = styled.div`
 const CardImageContainer = styled.div`
     
 `;
+const rotationFrontCard = css`
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+`;
+
+const rotationBackCard = css`
+    transform: rotateY(90deg);
+    transition: all ease-in 0.2s;
+`;
+
+const rotationFrontCover = css`
+    transition: all ease-in 0.2s;
+    transition-delay: 0.2s;
+`;
+
+const rotationBackCover = css`
+    transform: rotateY(90deg);
+    transition-delay: 0s
+`;
 
 const CardImage = styled.img`
-    transform: ${props => (props.isFlipped ? 'rotateY(0deg)' : 'rotateY(90deg)')};
+    ${props => (props.isFlipped ? rotationFrontCard : rotationBackCard)};
     position: absolute;
 `;
 
+const CoverImage = styled.img`
+    ${props => (props.isFlipped ? rotationBackCover : rotationFrontCover)};
+`;
 
 function CardChoice({card, handleChoice, isFlipped}){
 
     const handleClick = () => {
         handleChoice(card);
-        console.log(card);
     }
     return(
         <CardContainer>
@@ -33,7 +55,7 @@ function CardChoice({card, handleChoice, isFlipped}){
                  src={card.src}
                  alt='deck'
                 />
-                <img
+                <CoverImage
                  src={Cover.src}
                  onClick={handleClick}
                  alt='cover'
